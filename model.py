@@ -10,20 +10,25 @@ class YetNameless:
         self.boxes = [Box(line.strip('\n')) for line in dat]
         dat.close()
 
-    def open_box(self):
-        pass
-
     def new_box(self):
-        pass
+        self.boxes.append(input('Škatla: ') + '.txt')
+        self.save_changes()
 
     def delete_box(self):
-        pass
+        self.boxes.remove(input('Škatla: ') + '.txt')
+        self.save_changes()
 
-    def move_note(self):
-        pass
+    def move_note(self, other):
+        source = Box(input('Iz: ') + '.txt')
+        source.delete_note(other)
+        target = Box(input('V: ') + '.txt')
+        target.add_note(other)
 
     def save_changes(self):
-        pass
+        dat = open(self.main_file, 'w', encoding='UTF-8')
+        for box in self.boxes:
+            print(box.name, file=dat)
+        dat.close()
 
 
 class Box:
@@ -39,16 +44,21 @@ class Box:
     def __print__(self):
         return self.name.strip('.txt')
 
+    def open_box(self):
+        return self.content
+
     def refresh_notes(self):
         dat = open(self.name, 'r', encoding='UTF-8')
         self.content = [Note(line.strip('\n')) for line in dat]
         dat.close()
 
-    def add_note(self):
-        pass
+    def add_note(self, other):
+        self.content.append(other.text)
+        self.save_changes()
 
-    def delete_note(self):
-        pass
+    def delete_note(self, other):
+        self.content.remove(other.text)
+        self.save_changes()
 
     def save_changes(self):
         dat = open(self.name, 'w', encoding='UTF-8')
