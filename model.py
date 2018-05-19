@@ -1,3 +1,5 @@
+from os import remove
+
 class App:
 
     def __init__(self, main_file):
@@ -13,14 +15,18 @@ class App:
         dat.close()
 
     def new_box(self):
-        self.boxes.append(input('Škatla: ') + '.txt')
+        box = Box(input('Škatla: ') + '.txt')
+        self.boxes.append(box)
         self.save_changes()
+        box.refresh_notes()
 
-    def delete_box(self):
+    def delete_boxes(self):
         for box in self.selected:
+            remove(box.name)
             self.boxes.remove(box)
-            self.selected.discard(box)
+        self.selected = set()
         self.save_changes()
+        self.position -= 1
 
     def save_changes(self):
         dat = open(self.main_file, 'w', encoding='UTF-8')
@@ -29,13 +35,22 @@ class App:
         dat.close()
 
     def select_box(self):
-        self.selected |= set(self.boxes[self.position])
+        self.selected.add(self.boxes[self.position])
 
     def next(self):
-        self.position += 1
+        if self.position != len(self.boxes)-1:
+            self.position += 1
+        else:
+            self.position = 0
 
     def previous(self):
-        self.position -= 1
+        if self.position != 0:
+            self.position -= 1
+        else:
+            self.position = len(self.boxes) - 1
+
+    def open_box(self):
+        self.boxes[self.position].refresh_notes()
 
 
 class Box:
@@ -45,7 +60,6 @@ class Box:
         self.content = []
         self.selected = set()
         self.position = 0
-        self.refresh_notes()
 
     def __repr__(self):
         return 'Box(%s)' % self.name
@@ -57,8 +71,11 @@ class Box:
         return self.content
 
     def refresh_notes(self):
-        dat = open(self.name, 'r', encoding='UTF-8')
-        self.content = [Note(line.strip('\n')) for line in dat]
+        try:
+            dat = open(self.name, 'r', encoding='UTF-8')
+            self.content = [Note(line.strip('\n')) for line in dat]
+        except IOError:
+            dat = open(self.name, 'w', encoding='UTF-8')
         dat.close()
 
     def add_note(self, other):
