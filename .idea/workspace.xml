@@ -4,9 +4,8 @@
     <list default="true" id="32613285-ca88-4d36-938b-e99e564f7400" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Praškatla.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Praškatla.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Python.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boxes.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uporabniski umesnik.py" beforeDir="false" afterPath="$PROJECT_DIR$/user interface.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,25 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1244">
-              <caret line="123" column="28" lean-forward="true" selection-start-line="123" selection-start-column="28" selection-end-line="123" selection-end-column="28" />
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Praškatla.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Praškatla.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="uporabniski umesnik.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+      <file leaf-file-name="user interface.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/user interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="833">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -54,6 +48,7 @@
         <option value="$PROJECT_DIR$/uporabniski umesnik.py" />
         <option value="$PROJECT_DIR$/boxes.txt" />
         <option value="$PROJECT_DIR$/model.py" />
+        <option value="$PROJECT_DIR$/user interface.py" />
       </list>
     </option>
   </component>
@@ -117,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.user interface">
     <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="UVP - projektna naloga" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,9 +131,31 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="user interface" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="UVP - projektna naloga" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/user interface.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.model" />
+      <item itemvalue="Python.user interface" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.model" />
+        <item itemvalue="Python.user interface" />
         <item itemvalue="Python.model" />
         <item itemvalue="Python.model" />
         <item itemvalue="Python.model" />
@@ -151,8 +168,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1088" y="-1088" width="1096" height="2536" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3553875" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3553875" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32839507" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32839507" />
@@ -184,7 +202,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
@@ -208,7 +226,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
@@ -232,7 +250,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
@@ -256,7 +274,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
@@ -280,7 +298,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
@@ -304,16 +322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uporabniski umesnik.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boxes.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -331,13 +339,23 @@
     <entry file="file://$PROJECT_DIR$/boxes_main_file.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Praškatla.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/model.py">
+    <entry file="file://$PROJECT_DIR$/user interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1244">
-          <caret line="123" column="28" lean-forward="true" selection-start-line="123" selection-start-column="28" selection-end-line="123" selection-end-column="28" />
+        <state relative-caret-position="833">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

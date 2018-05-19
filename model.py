@@ -1,7 +1,7 @@
 from os import remove
 
 
-class App:
+class Mainframe:
 
     def __init__(self):
         self.boxes = []
@@ -27,7 +27,7 @@ class App:
         self.save_changes()
         box.refresh_notes()
 
-    def delete_boxes(self):
+    def delete_selected(self):
         for box in self.selected:
             remove(box.name)
             self.boxes.remove(box)
@@ -41,8 +41,11 @@ class App:
             print(box.name, file=dat)
         dat.close()
 
-    def select_box(self):
+    def add_box_selection(self):
         self.selected.add(self.boxes[self.position])
+
+    def remove_box_from_selection(self):
+        self.selected.remove(self.boxes[self.position])
 
     def next_box(self):
         if self.position != len(self.boxes)-1:
@@ -89,7 +92,7 @@ class Box:
         self.content.append(note)
         self.save_changes()
 
-    def delete_note(self):
+    def delete_selected(self):
         for note in self.selected:
             self.content.remove(note)
         self.selected = set()
