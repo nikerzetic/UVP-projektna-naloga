@@ -13,19 +13,9 @@ INNER_PADDING = 5
 LEFT_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
 LEFT_FRAME_WIDTH = 0.30 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
 
-LEFT_INNER_LEFT_FRAME_HEIGHT = LEFT_FRAME_HEIGHT - 2 * INNER_PADDING
-LEFT_INNER_LEFT_FRAME_WIDTH = 0.9 * (LEFT_FRAME_WIDTH - 2 * INNER_PADDING)
-RIGHT_INNER_LEFT_FRAME_HEIGHT = LEFT_FRAME_HEIGHT - 2 * INNER_PADDING
-RIGHT_INNER_LEFT_FRAME_WIDTH = 0.1 * (LEFT_FRAME_WIDTH - 2 * INNER_PADDING)
-
 # Middle frame constants
 MIDDLE_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
 MIDDLE_FRAME_WIDTH = 0.60 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
-
-LEFT_INNER_MIDDLE_FRAME_HEIGHT = MIDDLE_FRAME_HEIGHT - 2 * INNER_PADDING
-LEFT_INNER_MIDDLE_FRAME_WIDTH = 0.95 * (MIDDLE_FRAME_WIDTH - 2 * INNER_PADDING)
-RIGHT_INNER_MIDDLE_FRAME_HEIGHT = MIDDLE_FRAME_HEIGHT - 2 * INNER_PADDING
-RIGHT_INNER_MIDDLE_FRAME_WIDTH = 0.05 * (MIDDLE_FRAME_WIDTH - 2 * INNER_PADDING)
 
 # Right frame constants
 RIGHT_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
@@ -42,20 +32,30 @@ class App:
         # Left Frame and Content
         left_frame = tk.Frame(root, height=LEFT_FRAME_HEIGHT, width=LEFT_FRAME_WIDTH)
         left_frame.grid(row=0, column=0, padx=OUTER_PADDING, pady=OUTER_PADDING, ipadx=INNER_PADDING, ipady=INNER_PADDING)
-        left_inner_left_frame = tk.Frame(left_frame, height=LEFT_INNER_LEFT_FRAME_HEIGHT, width=LEFT_INNER_LEFT_FRAME_WIDTH)
-        left_inner_left_frame.grid(row=0, column=0)
-        right_inner_left_frame = tk.Frame(left_frame, height=RIGHT_INNER_LEFT_FRAME_HEIGHT, width=RIGHT_INNER_LEFT_FRAME_WIDTH)
-        right_inner_left_frame.grid(row=0, column=1)
+        left_frame.propagate(False)
 
-        left_frame_scrollbar = tk.Scrollbar(left_frame, bg='gray')
-        # left_frame_scrollbar.pack()
+        left_frame_listbox = tk.Listbox(left_frame)
+        left_frame_listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+
+        left_frame_scrollbar = tk.Scrollbar(left_frame)
+        left_frame_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        for i in range(100):
+            left_frame_listbox.insert(tk.END, i)
+
+        left_frame_listbox.config(yscrollcommand=left_frame_scrollbar.set)
+        left_frame_scrollbar.config(command=left_frame_listbox.yview)
 
         # Middle Frame and Content
         middle_frame = tk.Frame(root, height=MIDDLE_FRAME_HEIGHT, width=MIDDLE_FRAME_WIDTH)
         middle_frame.grid(row=0, column=1, padx=OUTER_PADDING, pady=OUTER_PADDING, ipadx=INNER_PADDING, ipady=INNER_PADDING)
+        middle_frame.propagate(False)
+
+        middle_frame_listbox = tk.Listbox(middle_frame)
+        middle_frame_listbox.pack(side=tk.LEFT, fill=tk.BOTH)
 
         middle_frame_scrollbar = tk.Scrollbar(middle_frame)
-        # middle_frame_scrollbar.pack()
+        middle_frame_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Right Frame and Content
         right_frame = tk.Frame(root, height=RIGHT_FRAME_HEIGHT, width=RIGHT_FRAME_WIDTH)
@@ -63,5 +63,7 @@ class App:
 
         root.mainloop()
 
+    def refresh_boxes(self):
+        pass
 
 App()
