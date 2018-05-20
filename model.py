@@ -67,13 +67,15 @@ class Box:
 
     def __init__(self, name):
         self.name = name
-        self.title = self.name.strip('.txt')
         self.content = []
         self.selected = set()
         self.position = 0
 
     def __repr__(self):
         return 'Box("%s")' % self.name
+
+    def __str__(self):
+        return self.name.strip('.txt')
 
     def open_box(self):
         self.refresh_notes()
@@ -138,3 +140,6 @@ class Note:
 
     def __repr__(self):
         return 'Note("%s")' % self.text
+
+    def __str__(self):
+        return self.text
