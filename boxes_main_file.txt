@@ -1,4 +1,1 @@
-Praškatla.txt
-Poskus.txt
-Ponoven poskus.txt
-Še bolj ponoven poskus.txt
+﻿Praškatla.txt

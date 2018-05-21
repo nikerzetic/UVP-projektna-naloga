@@ -133,7 +133,8 @@ class App:
 
     def ui_select_box(self):
         for i in self.left_frame_listbox.curselection():
-            self.mainframe.selected.add(model.Box(self.left_frame_listbox.get(i) + '.txt'))
+            self.mainframe.position = i
+            self.mainframe.add_box_to_selection()
 
     def ui_delete_box(self):
         self.ui_select_box()
@@ -144,5 +145,6 @@ class App:
         print(self.left_frame_listbox.curselection())
         for i in self.left_frame_listbox.curselection():
             print(self.left_frame_listbox.get(i))
+
 
 App()

@@ -29,7 +29,10 @@ class Mainframe:
 
     def delete_selected_boxes(self):
         for box in self.selected:
-            remove(box.name)
+            try:
+                remove(box.name)
+            except FileNotFoundError:
+                pass
             self.boxes.remove(box)
         self.selected = set()
         self.save_changes()
