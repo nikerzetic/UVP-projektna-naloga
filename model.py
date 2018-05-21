@@ -27,7 +27,7 @@ class Mainframe:
         self.save_changes()
         box.refresh_notes()
 
-    def delete_selected(self):
+    def delete_selected_boxes(self):
         for box in self.selected:
             remove(box.name)
             self.boxes.remove(box)
@@ -41,7 +41,7 @@ class Mainframe:
             print(box.name, file=dat)
         dat.close()
 
-    def add_box_selection(self):
+    def add_box_to_selection(self):
         self.selected.add(self.boxes[self.position])
 
     def remove_box_from_selection(self):
