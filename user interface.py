@@ -45,7 +45,7 @@ class App:
         menu_test = tk.Menu(main_menu)
         main_menu.add_cascade(label='Test', menu=menu_test)
 
-        menu_boxes.add_command(label='Nova škatla', command=self.ui_new_box)  # refresh boxes - better define new commands that do both
+        menu_boxes.add_command(label='Nova škatla', command=self.ui_new_box)
         menu_boxes.add_command(label='Izbriši škatle', command=self.ui_delete_box)  # add confirmation before deleting boxes
 
         menu_notes.add_command(label='Nov listek')
@@ -114,20 +114,20 @@ class App:
 
         self.root.mainloop()
 
-    def ui_pack_right_frame_option_menu(self):
-        self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.mainframe.boxes)
-        self.right_frame_option_menu.pack(fill=tk.X)
+    #  def ui_pack_right_frame_option_menu(self):
+        #  self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.mainframe.boxes)
+        #  self.right_frame_option_menu.pack(fill=tk.X)
 
     def ui_refresh(self):
         self.left_frame_listbox_and_scrollbar.refresh_listbox()
         #  self.ui_refresh_right_frame_option_menu()
 
-    def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh mainframe boxes
-        self.right_frame_option_menu.destroy()
-        self.ui_pack_right_frame_option_menu()
+    #  def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh mainframe boxes
+        #  self.right_frame_option_menu.destroy()
+        #  self.ui_pack_right_frame_option_menu()
 
-    def ui_new_box(self):  # ask for name in separate window and change model.py
-        self.new_box_window = nbw.NewBoxWindow()
+    def ui_new_box(self):  # find out why the listbox isn't refreshed when this method is called
+        nbw.NewBoxWindow()
         self.ui_refresh()
 
     def ui_select_box(self):
@@ -139,7 +139,7 @@ class App:
         self.ui_refresh()
 
     def what_does_this_do(self):
-        self.left_frame_listbox_and_scrollbar.refresh_listbox()
+        self.ui_refresh()
 
 
 App()
