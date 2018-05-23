@@ -21,8 +21,8 @@ class Mainframe:
             self.boxes.append(Box('Praškatla.txt'))
             dat.close()
 
-    def new_box(self):
-        box = Box(input('Škatla: ') + '.txt')
+    def new_box(self, name):
+        box = Box(name + '.txt')
         self.boxes.append(box)
         self.save_changes()
         box.refresh_notes()

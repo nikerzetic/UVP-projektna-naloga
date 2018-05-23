@@ -1,5 +1,7 @@
 import tkinter as tk
 import model
+import listbox_and_scrollbar as las
+import new_box_window as nbw
 
 # Window constants
 WINDOW_HEIGHT = 720
@@ -11,15 +13,15 @@ INNER_PADDING = 5
 
 # Right frame constants
 LEFT_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
-LEFT_FRAME_WIDTH = 0.30 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
+LEFT_FRAME_WIDTH = 0.20 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
 
 # Middle frame constants
 MIDDLE_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
-MIDDLE_FRAME_WIDTH = 0.60 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
+MIDDLE_FRAME_WIDTH = 0.70 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
 
 # Right frame constants
 RIGHT_FRAME_HEIGHT = WINDOW_HEIGHT - 2 * OUTER_PADDING
-RIGHT_FRAME_WIDTH = 0.30 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
+RIGHT_FRAME_WIDTH = 0.10 * (WINDOW_WIDTH - 6 * OUTER_PADDING)
 
 
 class App:
@@ -46,6 +48,10 @@ class App:
         menu_boxes.add_command(label='Nova škatla', command=self.ui_new_box)  # refresh boxes - better define new commands that do both
         menu_boxes.add_command(label='Izbriši škatle', command=self.ui_delete_box)  # add confirmation before deleting boxes
 
+        menu_notes.add_command(label='Nov listek')
+        menu_notes.add_command(label='Izbriši listek')
+        menu_notes.add_command(label='Premesti listek')
+
         menu_test.add_command(label='What does this do', command=self.what_does_this_do)
 
     # Left Frame and Content
@@ -56,7 +62,7 @@ class App:
         self.left_frame_title = tk.Label(self.left_frame, text='Škatle')
         self.left_frame_title.pack(side=tk.TOP)
 
-        self.ui_pack_left_frame_listbox_and_scrollbar()
+        self.left_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.left_frame, self.mainframe.boxes)
 
     # Middle Frame and Content
         self.middle_frame = tk.Frame(self.root, height=MIDDLE_FRAME_HEIGHT, width=MIDDLE_FRAME_WIDTH)
@@ -66,85 +72,74 @@ class App:
         self.middle_frame_title = tk.Label(self.middle_frame, text='Listki')
         self.middle_frame_title.pack(side=tk.TOP)
 
-        self.ui_pack_middle_frame_listbox_and_scrollbar()
+        self.middle_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.middle_frame, range(100))
 
     # Right Frame and Content
         self.right_frame = tk.Frame(self.root, height=RIGHT_FRAME_HEIGHT, width=RIGHT_FRAME_WIDTH)
         self.right_frame.grid(row=0, column=2, padx=OUTER_PADDING, pady=OUTER_PADDING, ipadx=INNER_PADDING, ipady=INNER_PADDING)
         self.right_frame.propagate(False)
 
-        self.right_frame_text = tk.Text(self.right_frame)
-        self.right_frame_text.pack(fill=tk.Y, expand=True)
+        self.button_box_label = tk.Label(self.right_frame, text='Škatle', bg='silver')
+        self.button_box_label.pack(fill=tk.X)
 
-        self.right_frame_lower_frame = tk.Frame(self.right_frame)
-        self.right_frame_lower_frame.pack(fill=tk.X)
+        self.button_new_box = tk.Button(self.right_frame, text='Nova škatla', command=self.ui_new_box)
+        self.button_new_box.pack(fill=tk.X)
 
-        self.tk_variable = tk.StringVar(self.root)
-        self.ui_pack_right_frame_option_menu()
+        self.button_delete_box = tk.Button(self.right_frame, text='Izbriši škatle', command=self.ui_delete_box)
+        self.button_delete_box.pack(fill=tk.X)
+
+        self.button_open_box = tk.Button(self.right_frame, text='Odpri škatle')
+        self.button_open_box.pack(fill=tk.X)
+
+        self.button_box_label = tk.Label(self.right_frame, text='Listki', bg='silver')
+        self.button_box_label.pack(fill=tk.X)
+
+        self.button_new_note = tk.Button(self.right_frame, text='Nov listek')
+        self.button_new_note.pack(fill=tk.X)
+
+        self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listek')
+        self.button_delete_note.pack(fill=tk.X)
+
+        self.button_move_note = tk.Button(self.right_frame, text='Premakni listek')
+        self.button_move_note.pack(fill=tk.X)
+
+        # self.right_frame_text = tk.Text(self.right_frame)
+        # self.right_frame_text.pack(fill=tk.Y, expand=True)
+
+        #  self.right_frame_lower_frame = tk.Frame(self.right_frame)
+        # self.right_frame_lower_frame.pack(fill=tk.X)
+
+        #  self.tk_variable = tk.StringVar(self.root)
+        #  self.ui_pack_right_frame_option_menu()
 
         self.root.mainloop()
-
-    def ui_pack_left_frame_listbox_and_scrollbar(self):
-        self.left_frame_listbox = tk.Listbox(self.left_frame, selectmode=tk.MULTIPLE)  # worth sacrificing this offense for cleaner code?
-        self.left_frame_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.left_frame_scrollbar = tk.Scrollbar(self.left_frame)
-        self.left_frame_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        for box in self.mainframe.boxes:
-            self.left_frame_listbox.insert(tk.END, box)
-
-        self.left_frame_listbox.config(yscrollcommand=self.left_frame_scrollbar.set)
-        self.left_frame_scrollbar.config(command=self.left_frame_listbox.yview)
-
-    def ui_pack_middle_frame_listbox_and_scrollbar(self):
-        self.middle_frame_listbox = tk.Listbox(self.middle_frame, selectmode=tk.MULTIPLE)
-        self.middle_frame_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.middle_frame_scrollbar = tk.Scrollbar(self.middle_frame)
-        self.middle_frame_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        for i in range(100):
-            self.middle_frame_listbox.insert(tk.END, i * str('AA'))
-
-        self.middle_frame_listbox.config(yscrollcommand=self.middle_frame_scrollbar.set)
-        self.middle_frame_scrollbar.config(command=self.middle_frame_listbox.yview)
 
     def ui_pack_right_frame_option_menu(self):
         self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.mainframe.boxes)
         self.right_frame_option_menu.pack(fill=tk.X)
 
     def ui_refresh(self):
-        self.ui_refresh_left_frame_listbox_and_scrollbar()
-        self.ui_refresh_right_frame_option_menu()
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
+        #  self.ui_refresh_right_frame_option_menu()
 
     def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh mainframe boxes
         self.right_frame_option_menu.destroy()
         self.ui_pack_right_frame_option_menu()
 
-    def ui_refresh_left_frame_listbox_and_scrollbar(self):
-        self.left_frame_listbox.destroy()
-        self.left_frame_scrollbar.destroy()
-        self.ui_pack_left_frame_listbox_and_scrollbar()
-
     def ui_new_box(self):  # ask for name in separate window and change model.py
-        self.mainframe.new_box()
+        self.new_box_window = nbw.NewBoxWindow()
         self.ui_refresh()
 
     def ui_select_box(self):
-        for i in self.left_frame_listbox.curselection():
-            self.mainframe.position = i
-            self.mainframe.add_box_to_selection()
+        self.left_frame_listbox_and_scrollbar.select()
 
     def ui_delete_box(self):
-        self.ui_select_box()
+        self.mainframe.selected |= self.left_frame_listbox_and_scrollbar.select()
         self.mainframe.delete_selected_boxes()
         self.ui_refresh()
 
     def what_does_this_do(self):
-        print(self.left_frame_listbox.curselection())
-        for i in self.left_frame_listbox.curselection():
-            print(self.left_frame_listbox.get(i))
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
 
 App()
