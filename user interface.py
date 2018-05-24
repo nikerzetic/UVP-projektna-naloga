@@ -2,6 +2,7 @@ import tkinter as tk
 import model
 import listbox_and_scrollbar as las
 import new_box_window as nbw
+import new_note_window as nnw
 
 # Window constants
 WINDOW_HEIGHT = 720
@@ -32,6 +33,7 @@ class App:
         self.root.configure(bg='gray')
 
         self.mainframe = model.Mainframe()
+        self.notes = []
 
     # Menu
 
@@ -72,7 +74,7 @@ class App:
         self.middle_frame_title = tk.Label(self.middle_frame, text='Listki')
         self.middle_frame_title.pack(side=tk.TOP)
 
-        self.middle_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.middle_frame, range(100))
+        self.middle_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.middle_frame, self.notes)
 
     # Right Frame and Content
         self.right_frame = tk.Frame(self.root, height=RIGHT_FRAME_HEIGHT, width=RIGHT_FRAME_WIDTH)
@@ -118,28 +120,35 @@ class App:
         #  self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.mainframe.boxes)
         #  self.right_frame_option_menu.pack(fill=tk.X)
 
-    def ui_refresh(self):
-        self.left_frame_listbox_and_scrollbar.refresh_listbox()
-        #  self.ui_refresh_right_frame_option_menu()
-
     #  def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh mainframe boxes
         #  self.right_frame_option_menu.destroy()
         #  self.ui_pack_right_frame_option_menu()
 
     def ui_new_box(self):  # find out why the listbox isn't refreshed when this method is called
-        nbw.NewBoxWindow()
-        self.ui_refresh()
+        nbw.NewBoxWindow(self.root, self.mainframe.new_box)
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
-    def ui_select_box(self):
-        self.left_frame_listbox_and_scrollbar.select()
+    def ui_select_boxes(self):
+        self.mainframe.selected |= self.left_frame_listbox_and_scrollbar.select()
 
     def ui_delete_box(self):
-        self.mainframe.selected |= self.left_frame_listbox_and_scrollbar.select()
+        self.ui_select_boxes()
         self.mainframe.delete_selected_boxes()
-        self.ui_refresh()
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
+
+    def ui_open_box(self):
+        self.ui_select_boxes()
+        for box in self.mainframe.selected:
+            for note in box.open_box():
+                self.notes.append(note)
+        self.middle_frame_listbox_and_scrollbar.refresh_listbox()
+
+    def ui_new_note(self):
+        nnw.NewNoteWindow(self.root, self.mainframe.boxes, model.box_add_note)
+        self.middle_frame_listbox_and_scrollbar.refresh_listbox()
 
     def what_does_this_do(self):
-        self.ui_refresh()
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
 
 App()

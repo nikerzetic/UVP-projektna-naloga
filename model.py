@@ -66,6 +66,11 @@ class Mainframe:
         self.boxes[self.position].open_box()
 
 
+def box_add_note(name, text):
+        note = Note(text)
+        Box(name + '.txt').add_note(note)
+
+
 class Box:
 
     def __init__(self, name):
@@ -92,8 +97,7 @@ class Box:
             dat = open(self.name, 'w', encoding='UTF-8')
         dat.close()
 
-    def add_note(self):
-        note = Note(input('Zapisek: '))
+    def add_note(self, note):
         self.content.append(note)
         self.save_changes()
 

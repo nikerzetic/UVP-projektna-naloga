@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class ListboxAndScrollbar:
-    def __init__(self, master, items):
+    def __init__(self, master, items=[]):
         self.master = master
         self.items = items
         self.selected = set()
