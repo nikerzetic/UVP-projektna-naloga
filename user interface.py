@@ -96,7 +96,7 @@ class App:
         self.button_box_label = tk.Label(self.right_frame, text='Listki', bg='silver')
         self.button_box_label.pack(fill=tk.X)
 
-        self.button_new_note = tk.Button(self.right_frame, text='Nov listek')
+        self.button_new_note = tk.Button(self.right_frame, text='Nov listek', command=self.ui_new_note)
         self.button_new_note.pack(fill=tk.X)
 
         self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listek')
@@ -137,10 +137,8 @@ class App:
         self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_open_box(self):
-        self.ui_select_boxes()
-        for box in self.mainframe.selected:
-            for note in box.open_box():
-                self.notes.append(note)
+        for note in self.mainframe.selected:
+            self.notes.append(note.text)
         self.middle_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_new_note(self):

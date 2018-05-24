@@ -6,7 +6,7 @@ class ListboxAndScrollbar:
         self.master = master
         self.items = items
         self.selected = set()
-        self.listbox = tk.Listbox(self.master, selectmode=tk.MULTIPLE)  # worth sacrificing this offense for cleaner code?
+        self.listbox = tk.Listbox(self.master, selectmode=tk.MULTIPLE)
         self.listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         self.scrollbar = tk.Scrollbar(self.master)
@@ -19,7 +19,11 @@ class ListboxAndScrollbar:
         self.scrollbar.config(command=self.listbox.yview)
 
     def refresh_listbox(self):
-        self.listbox.delete(0, tk.END)
+        self.listbox.destroy()
+
+        self.listbox = tk.Listbox(self.master, selectmode=tk.MULTIPLE)
+        self.listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
         for item in self.items:
             self.listbox.insert(tk.END, item)
 
