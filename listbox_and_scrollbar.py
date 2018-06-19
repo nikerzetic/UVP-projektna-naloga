@@ -2,11 +2,11 @@ import tkinter as tk
 
 
 class ListboxAndScrollbar:
-    def __init__(self, master, items=[]):
+    def __init__(self, master, items=[], selection_method=tk.MULTIPLE):
         self.master = master
         self.items = items
         self.selected = set()
-        self.listbox = tk.Listbox(self.master, selectmode=tk.MULTIPLE)
+        self.listbox = tk.Listbox(self.master, selectmode=selection_method)
         self.listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         self.scrollbar = tk.Scrollbar(self.master)

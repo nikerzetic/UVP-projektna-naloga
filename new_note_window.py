@@ -1,11 +1,12 @@
 import tkinter as tk
+import model
 
 
 class NewNoteWindow:
     def __init__(self, master, content, command):
         self.master = master
-        self.command = command
         self.content = content
+        self.command = command
 
         self.window = tk.Toplevel(self.master)
         self.window.title('Nov listek')
@@ -22,8 +23,9 @@ class NewNoteWindow:
         self.confirm_new_box.pack()
 
     def create(self):
-        if self.enter_new_note_content.get:
-            self.command(self.tk_variable, self.enter_new_note_content.get)
+        if self.enter_new_note_content.get():
+            model.Box(self.tk_variable.get()).add_note(self.enter_new_note_content.get())
+            self.command()
             self.window.destroy()
         else:
             self.window.destroy()

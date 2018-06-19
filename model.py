@@ -17,12 +17,12 @@ class Mainframe:
             dat.close()
         except IOError:
             dat = open(self.main_file, 'w', encoding='UTF-8')
-            print('Praškatla.txt', file=dat)
-            self.boxes.append(Box('Praškatla.txt'))
+            print('Praškatla', file=dat)
+            self.boxes.append(Box('Praškatla'))
             dat.close()
 
     def new_box(self, name):
-        box = Box(name + '.txt')
+        box = Box(name)
         self.boxes.append(box)
         self.save_changes()
         box.refresh_notes()
@@ -30,7 +30,7 @@ class Mainframe:
     def delete_selected_boxes(self):
         for box in self.selected:
             try:
-                remove(box.name)
+                remove(box.address)
             except FileNotFoundError:
                 pass
             self.boxes.remove(box)
@@ -63,18 +63,16 @@ class Mainframe:
             self.position = len(self.boxes) - 1
 
     def open_current_box(self):
-        self.boxes[self.position].open_box()
-
-
-def box_add_note(name, text):
-        note = Note(text)
-        Box(name + '.txt').add_note(note)
+        box = self.boxes[self.position]
+        box.refresh_notes()
+        return box.content
 
 
 class Box:
 
     def __init__(self, name):
         self.name = name
+        self.address = self.name + '.txt'
         self.content = []
         self.selected = set()
         self.position = 0
@@ -83,18 +81,14 @@ class Box:
         return 'Box("%s")' % self.name
 
     def __str__(self):
-        return self.name.strip('.txt')
-
-    def open_box(self):
-        self.refresh_notes()
-        return self.content
+        return self.name
 
     def refresh_notes(self):
         try:
-            dat = open(self.name, 'r', encoding='UTF-8')
-            self.content = [Note(line.strip('\n')) for line in dat]
+            dat = open(self.address, 'r', encoding='UTF-8')
+            self.content = [line.strip('\n').strip('[<o>]') for line in dat]
         except IOError:
-            dat = open(self.name, 'w', encoding='UTF-8')
+            dat = open(self.address, 'w', encoding='UTF-8')
         dat.close()
 
     def add_note(self, note):
@@ -108,9 +102,9 @@ class Box:
         self.save_changes()
 
     def save_changes(self):
-        dat = open(self.name, 'w', encoding='UTF-8')
+        dat = open(self.address, 'w', encoding='UTF-8')
         for note in self.content:
-            print(note.text, file=dat)
+            print('[<o>]' + note + '[<o>]', file=dat)
         dat.close()
 
     def move_note(self, other):
@@ -124,7 +118,7 @@ class Box:
     def add_note_to_selection(self):
         self.selected.add(self.content[self.position])
 
-    def remove_not_from_selection(self):
+    def remove_note_from_selection(self):
         self.selected.discard(self.content[self.position])
 
     def next_note(self):
@@ -138,15 +132,3 @@ class Box:
             self.position -= 1
         else:
             self.position = len(self.content) - 1
-
-
-class Note:
-
-    def __init__(self, text):
-        self.text = text
-
-    def __repr__(self):
-        return 'Note("%s")' % self.text
-
-    def __str__(self):
-        return self.text
