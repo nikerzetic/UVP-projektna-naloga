@@ -1,10 +1,11 @@
 from os import remove
 
 
-class Mainframe:
+class Main:
 
     def __init__(self):
         self.boxes = []
+        self.notes = []
         self.selected = set()
         self.main_file = 'boxes_main_file.txt'
         self.refresh_boxes()
@@ -44,6 +45,14 @@ class Mainframe:
             print(box.name, file=dat)
         dat.close()
 
+    def open_boxes(self):
+        self.notes.clear()
+        for box in self.selected:
+            box.refresh_notes()
+            self.notes.extend(box.content)
+
+    # Tools for use trough console
+
     def add_box_to_selection(self):
         self.selected.add(self.boxes[self.position])
 
@@ -61,11 +70,6 @@ class Mainframe:
             self.position -= 1
         else:
             self.position = len(self.boxes) - 1
-
-    def open_current_box(self):
-        box = self.boxes[self.position]
-        box.refresh_notes()
-        return box.content
 
 
 class Box:
@@ -86,12 +90,13 @@ class Box:
     def refresh_notes(self):
         try:
             dat = open(self.address, 'r', encoding='UTF-8')
-            self.content = [line.strip('\n').strip('[<o>]') for line in dat]
+            self.content = [line.strip('\n') for line in dat]
         except IOError:
             dat = open(self.address, 'w', encoding='UTF-8')
         dat.close()
 
     def add_note(self, note):
+        self.refresh_notes()
         self.content.append(note)
         self.save_changes()
 
@@ -104,7 +109,7 @@ class Box:
     def save_changes(self):
         dat = open(self.address, 'w', encoding='UTF-8')
         for note in self.content:
-            print('[<o>]' + note + '[<o>]', file=dat)
+            print(note, file=dat)
         dat.close()
 
     def move_note(self, other):

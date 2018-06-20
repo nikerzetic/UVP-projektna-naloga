@@ -3,10 +3,14 @@ import model
 import listbox_and_scrollbar as las
 import new_box_window as nbw
 import new_note_window as nnw
+import ctypes
 
 # Window constants
-WINDOW_HEIGHT = 720
-WINDOW_WIDTH = 1280
+user32 = ctypes.windll.user32
+WINDOW_HEIGHT = user32.GetSystemMetrics(1) - 200
+WINDOW_WIDTH = user32.GetSystemMetrics(0) - 100
+WINDOW_X = 20
+WINDOW_Y = 20
 
 # Padding constants
 OUTER_PADDING = 10
@@ -31,9 +35,9 @@ class App:
         self.root = tk.Tk()
         self.root.title('Spominske škatle')
         self.root.configure(bg='gray')
+        self.root.geometry('%dx%d+%d+%d' % (WINDOW_WIDTH + 3 * OUTER_PADDING, WINDOW_HEIGHT + OUTER_PADDING, WINDOW_X, WINDOW_Y))
 
-        self.mainframe = model.Mainframe()
-        self.notes = []
+        self.main = model.Main()
         self.should_refresh = tk.BooleanVar(False)
 
     # Menu
@@ -65,7 +69,7 @@ class App:
         self.left_frame_title = tk.Label(self.left_frame, text='Škatle')
         self.left_frame_title.pack(side=tk.TOP)
 
-        self.left_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.left_frame, self.mainframe.boxes, tk.SINGLE)
+        self.left_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.left_frame, self.main.boxes, tk.SINGLE)
 
     # Middle Frame and Content
         self.middle_frame = tk.Frame(self.root, height=MIDDLE_FRAME_HEIGHT, width=MIDDLE_FRAME_WIDTH)
@@ -75,7 +79,7 @@ class App:
         self.middle_frame_title = tk.Label(self.middle_frame, text='Listki')
         self.middle_frame_title.pack(side=tk.TOP)
 
-        self.middle_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.middle_frame, self.notes)
+        self.middle_frame_listbox_and_scrollbar = las.ListboxAndScrollbar(self.middle_frame, self.main.notes)
 
     # Right Frame and Content
         self.right_frame = tk.Frame(self.root, height=RIGHT_FRAME_HEIGHT, width=RIGHT_FRAME_WIDTH)
@@ -100,7 +104,7 @@ class App:
         self.button_new_note = tk.Button(self.right_frame, text='Nov listek', command=self.ui_new_note)
         self.button_new_note.pack(fill=tk.X)
 
-        self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke')
+        self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke', command=self.ui_delete_notes())
         self.button_delete_note.pack(fill=tk.X)
 
         self.button_move_note = tk.Button(self.right_frame, text='Premakni listke')
@@ -118,38 +122,36 @@ class App:
         self.root.mainloop()
 
     #  def ui_pack_right_frame_option_menu(self):
-        #  self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.mainframe.boxes)
+        #  self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.main.boxes)
         #  self.right_frame_option_menu.pack(fill=tk.X)
 
-    #  def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh mainframe boxes
+    #  def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh main boxes
         #  self.right_frame_option_menu.destroy()
         #  self.ui_pack_right_frame_option_menu()
 
     def ui_new_box(self):
-        nbw.NewBoxWindow(self.root, self.mainframe.new_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
+        nbw.NewBoxWindow(self.root, self.main.new_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
 
     def ui_select_box(self):
-        self.mainframe.selected |= self.left_frame_listbox_and_scrollbar.select()
+        self.main.selected = self.left_frame_listbox_and_scrollbar.select()
 
     def ui_delete_box(self):
         self.ui_select_box()
-        self.mainframe.delete_selected_boxes()
+        self.main.delete_selected_boxes()
         self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_open_box(self):
         self.ui_select_box()
-        for box in self.mainframe.selected:
-            box.refresh_notes()
-            self.notes = box.content
+        self.main.open_boxes()
         self.middle_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_new_note(self):
-        nnw.NewNoteWindow(self.root, self.mainframe.boxes, self.middle_frame_listbox_and_scrollbar.refresh_listbox)
+        nnw.NewNoteWindow(self.root, self.main.boxes)
 
     def ui_select_note(self):
         pass
 
-    def ui_delete_note(self):
+    def ui_delete_notes(self):
         pass
 
     def ui_edit_note(self):
