@@ -38,7 +38,6 @@ class App:
         self.root.geometry('%dx%d+%d+%d' % (WINDOW_WIDTH + 3 * OUTER_PADDING, WINDOW_HEIGHT + OUTER_PADDING, WINDOW_X, WINDOW_Y))
 
         self.main = model.Main()
-        self.should_refresh = tk.BooleanVar(False)
 
     # Menu
 
@@ -104,35 +103,22 @@ class App:
         self.button_new_note = tk.Button(self.right_frame, text='Nov listek', command=self.ui_new_note)
         self.button_new_note.pack(fill=tk.X)
 
-        self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke', command=self.ui_delete_notes())
+        self.button_edit_note = tk.Button(self.right_frame, text='Uredi listek', command=self.ui_edit_note)
+        self.button_edit_note.pack(fill=tk.X)
+
+        self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke', command=self.ui_delete_notes)
         self.button_delete_note.pack(fill=tk.X)
 
-        self.button_move_note = tk.Button(self.right_frame, text='Premakni listke')
+        self.button_move_note = tk.Button(self.right_frame, text='Premakni listke', command=self.ui_move_note)
         self.button_move_note.pack(fill=tk.X)
 
-        # self.right_frame_text = tk.Text(self.right_frame)
-        # self.right_frame_text.pack(fill=tk.Y, expand=True)
-
-        #  self.right_frame_lower_frame = tk.Frame(self.right_frame)
-        # self.right_frame_lower_frame.pack(fill=tk.X)
-
-        #  self.tk_variable = tk.StringVar(self.root)
-        #  self.ui_pack_right_frame_option_menu()
-
         self.root.mainloop()
-
-    #  def ui_pack_right_frame_option_menu(self):
-        #  self.right_frame_option_menu = tk.OptionMenu(self.right_frame, self.tk_variable, *self.main.boxes)
-        #  self.right_frame_option_menu.pack(fill=tk.X)
-
-    #  def ui_refresh_right_frame_option_menu(self):  # when all is combined in one ui_refresh method, ui_refresh main boxes
-        #  self.right_frame_option_menu.destroy()
-        #  self.ui_pack_right_frame_option_menu()
 
     def ui_new_box(self):
         nbw.NewBoxWindow(self.root, self.main.new_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
 
     def ui_select_box(self):
+        self.main.deselect_all()
         self.main.selected = self.left_frame_listbox_and_scrollbar.select()
 
     def ui_delete_box(self):
@@ -148,8 +134,12 @@ class App:
     def ui_new_note(self):
         nnw.NewNoteWindow(self.root, self.main.boxes)
 
-    def ui_select_note(self):
-        pass
+    def ui_select_notes(self):
+        #  self.main.deselect_all()
+        box = min(self.main.selected)
+        print(box)
+        box.selected = self.middle_frame_listbox_and_scrollbar.select()
+        print(box.selected)
 
     def ui_delete_notes(self):
         pass
@@ -157,9 +147,15 @@ class App:
     def ui_edit_note(self):
         pass
 
+    def ui_move_note(self):
+        pass
+
     def what_does_this_do(self):
         self.left_frame_listbox_and_scrollbar.refresh_listbox()
         self.middle_frame_listbox_and_scrollbar.refresh_listbox()
+        print(self.main.selected)
+        self.ui_select_notes()
+        print(self.main.selected)
 
 
 App()

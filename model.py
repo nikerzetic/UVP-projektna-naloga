@@ -7,6 +7,7 @@ class Main:
         self.boxes = []
         self.notes = []
         self.selected = set()
+        self.selected_notes = set()
         self.main_file = 'boxes_main_file.txt'
         self.refresh_boxes()
         self.position = 0
@@ -58,6 +59,11 @@ class Main:
 
     def remove_box_from_selection(self):
         self.selected.remove(self.boxes[self.position])
+
+    def deselect_all(self):
+        self.position = 0
+        while len(self.selected) > 0:
+            self.remove_box_from_selection()
 
     def next_box(self):
         if self.position != len(self.boxes)-1:
