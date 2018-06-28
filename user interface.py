@@ -120,6 +120,7 @@ class App:
     def ui_select_box(self):
         self.main.deselect_all()
         self.main.selected = self.left_frame_listbox_and_scrollbar.select()
+        self.selected_box = min(self.main.selected)
 
     def ui_delete_box(self):
         self.ui_select_box()
@@ -136,9 +137,13 @@ class App:
 
     def ui_select_notes(self):
         #  self.main.deselect_all()
-        box = min(self.main.selected)
+        for i in self.main.selected:
+            box = i
+        box.refresh_notes()
         print(box)
-        box.selected = self.middle_frame_listbox_and_scrollbar.select()
+        selection = self.middle_frame_listbox_and_scrollbar.select()
+        print(selection)
+        box.selected = selection
         print(box.selected)
 
     def ui_delete_notes(self):
