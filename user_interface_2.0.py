@@ -1,7 +1,7 @@
 import tkinter as tk
 import model_2
 import constants as cst
-import setup as stp
+import frames as frs
 import listbox_and_scrollbar as las
 import new_box_window as nbw
 import new_note_window as nnw
@@ -15,18 +15,24 @@ class App:
         self.root.title('Spominske škatle')
         self.root.configure(bg='gray')
 
-        self.commands = [None, None, None, None, None, None, None]
+        self.main = model_2.Main()
 
-        self.left_frame = stp.LeftFrame(self.root, cst.LEFT_FRAME_HEIGHT, cst.LEFT_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING)
-        self.middle_frame = stp.MiddleFrame(self.root, cst.MIDDLE_FRAME_HEIGHT, cst.MIDDLE_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING)
-        self.right_frame = stp.RightFrame(self.root, cst.RIGHT_FRAME_HEIGHT, cst.RIGHT_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING, self.commands)
+        self.notes = []
+        self.commands = [None, self.ui_delete_box, None, None, None, None, None]
+
+        self.left_frame = frs.LeftFrame(self.root, cst.LEFT_FRAME_HEIGHT, cst.LEFT_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING, self.main.boxes)
+        self.middle_frame = frs.MiddleFrame(self.root, cst.MIDDLE_FRAME_HEIGHT, cst.MIDDLE_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING, self.notes)
+        self.right_frame = frs.RightFrame(self.root, cst.RIGHT_FRAME_HEIGHT, cst.RIGHT_FRAME_WIDTH, cst.OUTER_PADDING, cst.INNER_PADDING, self.commands)
+
+        self.selected_box = None
+        self.selected_notes = set()
 
         self.root.mainloop()
 
     # Box methods
 
     def ui_select_box(self):
-        pass
+        self.selected_box = next(iter(self.left_frame.listbox_and_scrollbar.select()))
 
     def ui_new_box(self):
         pass
@@ -38,12 +44,14 @@ class App:
         pass
 
     def ui_delete_box(self):
-        pass
+        self.ui_select_box()
+        self.main.delete_box(self.selected_box)
+        self.left_frame.listbox_and_scrollbar.refresh_listbox()
 
     # Note methods
 
     def ui_select_notes(self):
-        pass
+        self.selected_notes = self.middle_frame.frame_listbox_and_scrollbar.select()
 
     def ui_new_note(self):
         pass

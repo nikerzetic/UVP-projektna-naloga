@@ -1,3 +1,5 @@
+from os import remove
+
 class Main:
 
     def __init__(self):
@@ -28,6 +30,10 @@ class Main:
         box.refresh_notes()
 
     def delete_box(self, box):
+        try:
+            remove(box.address)
+        except FileNotFoundError:
+            pass
         self.boxes.remove(box)
         self.save_changes()
         box.refresh_notes()
