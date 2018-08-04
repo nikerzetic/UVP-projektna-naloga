@@ -13,20 +13,20 @@ class MoveNoteWindow:
         self.window.title('Premakni listke')
 
         self.move_from_label = tk.LabelFrame(self.window, text='Premakni iz:')
-        self.move_from_label.pack(fill=tk.X)
+        self.move_from_label.pack(fill=tk.BOTH, expand=tk.YES)
 
-        self.move_from_box = tk.Label(self.window, text=str(self.box))
+        self.move_from_box = tk.Label(self.move_from_label, text=str(self.box))
         self.move_from_box.pack()
 
-        self.move_to_label = tk.LabelFrame(self.window, text='v:')
-        self.move_to_label.pack(fill=tk.X)
+        self.move_to_label = tk.LabelFrame(self.window, text='Premakni v:')
+        self.move_to_label.pack(fill=tk.BOTH, expand=tk.YES)
 
-        self.tk_variable = tk.StringVar(self.window)
+        self.tk_variable = tk.StringVar(self.move_to_label)
         self.tk_variable.set(self.content[0])
-        self.option_menu = tk.OptionMenu(self.window, self.tk_variable, *self.content)
+        self.option_menu = tk.OptionMenu(self.move_to_label, self.tk_variable, *self.content)
         self.option_menu.pack(fill=tk.X)
 
-        self.button_frame = tk.Frame(self.window)
+        self.button_frame = tk.Frame(self.move_to_label)
         self.button_frame.pack(fill=tk.X)
 
         self.cancel_button = tk.Button(self.button_frame, text='Prekliči', command=self.cancel)
