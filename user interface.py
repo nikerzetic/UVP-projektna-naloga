@@ -3,6 +3,7 @@ import model
 import listbox_and_scrollbar as las
 import new_box_window as nbw
 import new_note_window as nnw
+import move_note_window as mnw
 import ctypes
 
 # Window constants
@@ -115,41 +116,50 @@ class App:
 
         self.root.mainloop()
 
+    # Box commands
     def ui_new_box(self):
         nbw.NewBoxWindow(self.root, self.main.new_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
 
     def ui_select_box(self):
-        self.main.deselect_all()
-        self.main.selected = self.left_frame_listbox_and_scrollbar.select()
+        self.main.selected_box = min(self.left_frame_listbox_and_scrollbar.select())
 
     def ui_delete_box(self):
         self.ui_select_box()
-        self.main.delete_selected_boxes()
+        self.main.delete_selected_box()
         self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
-    def ui_open_box(self):
-        self.ui_select_box()
-        self.main.open_boxes()
+    def ui_open_box(self, selected_box=None):
+        if selected_box:
+            self.main.selected = [selected_box]
+        else:
+            self.ui_select_box()
+        self.main.open_box()
+        self.left_frame_listbox_and_scrollbar.refresh_listbox()
         self.middle_frame_listbox_and_scrollbar.refresh_listbox()
+
+    def ui_rename_box(self):
+        pass
+
+    # Note commands
 
     def ui_new_note(self):
         nnw.NewNoteWindow(self.root, self.main.boxes)
 
     def ui_select_notes(self):
-        #  self.main.deselect_all()
-        box = min(self.main.selected)
-        box.refresh_notes()
-        selection = self.middle_frame_listbox_and_scrollbar.select()  # empty curseselection
-        box.selected = selection
+        self.main.selected_box.refresh_notes()
+        self.main.selected_box.selected = self.middle_frame_listbox_and_scrollbar.select()
 
     def ui_delete_notes(self):
-        pass
+        self.ui_select_notes()
+        self.main.selected_box.delete_selected()
+        self.ui_open_box(self.main.selected_box)
 
     def ui_edit_note(self):
         pass
 
-    def ui_move_note(self):
-        pass
+    def ui_move_notes(self):
+        self.ui_select_notes()
+        mnw.MoveNoteWindow(self.root, self.main.selected_box, self.main.boxes)
 
     def what_does_this_do(self):
         self.ui_select_notes()

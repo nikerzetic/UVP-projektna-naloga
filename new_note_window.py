@@ -27,4 +27,3 @@ class NewNoteWindow:
             self.window.destroy()
         else:
             self.window.destroy()
-

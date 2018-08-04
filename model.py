@@ -6,7 +6,7 @@ class Main:
     def __init__(self):
         self.boxes = []
         self.notes = []
-        self.selected = set()
+        self.selected_box = None
         self.selected_notes = set()
         self.main_file = 'boxes_main_file.txt'
         self.refresh_boxes()
@@ -29,14 +29,13 @@ class Main:
         self.save_changes()
         box.refresh_notes()
 
-    def delete_selected_boxes(self):
-        for box in self.selected:
-            try:
-                remove(box.address)
-            except FileNotFoundError:
-                pass
-            self.boxes.remove(box)
-        self.selected = set()
+    def delete_selected_box(self):
+        try:
+            remove(self.selected_box.address)
+        except FileNotFoundError:
+            pass
+        self.boxes.remove(self.selected_box)
+        self.selected_box = None
         self.save_changes()
         self.position = 0
 
@@ -46,24 +45,19 @@ class Main:
             print(box.name, file=dat)
         dat.close()
 
-    def open_boxes(self):
+    def open_box(self):
         self.notes.clear()
-        for box in self.selected:
-            box.refresh_notes()
-            self.notes.extend(box.content)
+        if self.selected_box:
+            self.selected_box.refresh_notes()
+            self.notes.extend(self.selected_box.content)
 
     # Tools for use trough console
 
-    def add_box_to_selection(self):
-        self.selected.add(self.boxes[self.position])
-
-    def remove_box_from_selection(self):
-        self.selected.remove(self.boxes[self.position])
+    def select_box(self):
+        self.selected_box = self.boxes[self.position]
 
     def deselect_all(self):
-        self.position = 0
-        while len(self.selected) > 0:
-            self.remove_box_from_selection()
+        self.selected_box = None
 
     def next_box(self):
         if self.position != len(self.boxes)-1:
@@ -93,6 +87,13 @@ class Box:
     def __str__(self):
         return self.name
 
+    def __eq__(self, other):
+        self.refresh_notes()
+        other.refresh_notes()
+        if self.name == other.name and self.content == other.content:
+            return True
+        return False
+
     def refresh_notes(self):
         try:
             dat = open(self.address, 'r', encoding='UTF-8')
@@ -118,13 +119,16 @@ class Box:
             print(note, file=dat)
         dat.close()
 
-    def move_note(self, other):
+    def move_notes(self, other):
+        other.refresh_notes()
         for note in self.selected:
             other.content.append(note)
             self.content.remove(note)
             self.selected.discard(note)
         self.save_changes()
         other.save_changes()
+
+    # Tools for use through console
 
     def add_note_to_selection(self):
         self.selected.add(self.content[self.position])

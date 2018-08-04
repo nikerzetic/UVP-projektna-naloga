@@ -29,6 +29,7 @@ class ListboxAndScrollbar:
             self.listbox.insert(tk.END, item)
 
     def select(self):
+        self.selected = set()
         for i in self.listbox.curselection():
             self.selected.add(self.items[i])
         return self.selected
