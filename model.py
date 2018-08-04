@@ -124,7 +124,7 @@ class Box:
         for note in self.selected:
             other.content.append(note)
             self.content.remove(note)
-            self.selected.discard(note)
+        self.selected = set()
         self.save_changes()
         other.save_changes()
 

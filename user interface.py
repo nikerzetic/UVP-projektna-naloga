@@ -111,7 +111,7 @@ class App:
         self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke', command=self.ui_delete_notes)
         self.button_delete_note.pack(fill=tk.X)
 
-        self.button_move_note = tk.Button(self.right_frame, text='Premakni listke', command=self.ui_move_note)
+        self.button_move_note = tk.Button(self.right_frame, text='Premakni listke', command=self.ui_move_notes)
         self.button_move_note.pack(fill=tk.X)
 
         self.root.mainloop()
@@ -121,7 +121,7 @@ class App:
         nbw.NewBoxWindow(self.root, self.main.new_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
 
     def ui_select_box(self):
-        self.main.selected_box = min(self.left_frame_listbox_and_scrollbar.select())
+        self.main.selected_box = self.left_frame_listbox_and_scrollbar.select()[0]
 
     def ui_delete_box(self):
         self.ui_select_box()
@@ -130,7 +130,7 @@ class App:
 
     def ui_open_box(self, selected_box=None):
         if selected_box:
-            self.main.selected = [selected_box]
+            self.main.selected = selected_box
         else:
             self.ui_select_box()
         self.main.open_box()
@@ -147,7 +147,7 @@ class App:
 
     def ui_select_notes(self):
         self.main.selected_box.refresh_notes()
-        self.main.selected_box.selected = self.middle_frame_listbox_and_scrollbar.select()
+        self.main.selected_box.selected = set(self.middle_frame_listbox_and_scrollbar.select())
 
     def ui_delete_notes(self):
         self.ui_select_notes()
@@ -159,7 +159,7 @@ class App:
 
     def ui_move_notes(self):
         self.ui_select_notes()
-        mnw.MoveNoteWindow(self.root, self.main.selected_box, self.main.boxes)
+        mnw.MoveNoteWindow(self.root, self.main.selected_box, self.main.boxes, self.ui_open_box)
 
     def what_does_this_do(self):
         self.ui_select_notes()
