@@ -51,6 +51,16 @@ class Main:
             self.selected_box.refresh_notes()
             self.notes.extend(self.selected_box.content)
 
+    def rename_box(self, name):
+        if self.selected_box:
+            self.new_box(name)
+            box = Box(name)
+            self.selected_box.refresh_notes()
+            box.refresh_notes()
+            box.content.append(self.selected_box.content)
+            box.save_changes()
+            self.delete_selected_box()
+
     # Tools for use trough console
 
     def select_box(self):

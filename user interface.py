@@ -5,6 +5,7 @@ import new_box_window as nbw
 import new_note_window as nnw
 import move_note_window as mnw
 import confirm_window as cw
+import rename_box_window as rbw
 import ctypes
 
 # Window constants
@@ -47,19 +48,8 @@ class App:
         main_menu = tk.Menu(self.root)
         self.root.config(menu=main_menu)
 
-        menu_boxes = tk.Menu(main_menu)
-        main_menu.add_cascade(label='Škatle', menu=menu_boxes)
-        menu_notes = tk.Menu(main_menu)
-        main_menu.add_cascade(label='Listki', menu=menu_notes)
         menu_test = tk.Menu(main_menu)
         main_menu.add_cascade(label='Test', menu=menu_test)
-
-        menu_boxes.add_command(label='Nova škatla', command=self.ui_new_box)
-        menu_boxes.add_command(label='Izbriši škatlo', command=self.ui_delete_box)  # add confirmation before deleting boxes
-
-        menu_notes.add_command(label='Nov listek')
-        menu_notes.add_command(label='Izbriši listke')
-        menu_notes.add_command(label='Premakni listke')
 
         menu_test.add_command(label='What does this do', command=self.what_does_this_do)
 
@@ -88,8 +78,8 @@ class App:
         self.right_frame.grid(row=0, column=2, padx=OUTER_PADDING, pady=OUTER_PADDING, ipadx=INNER_PADDING, ipady=INNER_PADDING)
         self.right_frame.propagate(False)
 
-        self.button_box_label = tk.Label(self.right_frame, text='Škatle', bg='silver')
-        self.button_box_label.pack(fill=tk.X)
+        self.button_box_label_boxes = tk.Label(self.right_frame, text='Škatle', bg='silver')
+        self.button_box_label_boxes.pack(fill=tk.X)
 
         self.button_new_box = tk.Button(self.right_frame, text='Nova škatla', command=self.ui_new_box)
         self.button_new_box.pack(fill=tk.X)
@@ -97,11 +87,14 @@ class App:
         self.button_delete_box = tk.Button(self.right_frame, text='Izbriši škatlo', command=self.ui_delete_box)
         self.button_delete_box.pack(fill=tk.X)
 
+        self.button_rename_box = tk.Button(self.right_frame, text='Preimenuj škatlo', command=self.ui_rename_box)
+        self.button_rename_box.pack(fill=tk.X)
+
         self.button_open_box = tk.Button(self.right_frame, text='Odpri škatlo', command=self.ui_open_box)
         self.button_open_box.pack(fill=tk.X)
 
-        self.button_box_label = tk.Label(self.right_frame, text='Listki', bg='silver')
-        self.button_box_label.pack(fill=tk.X)
+        self.button_box_label_notes = tk.Label(self.right_frame, text='Listki', bg='silver')
+        self.button_box_label_notes.pack(fill=tk.X)
 
         self.button_new_note = tk.Button(self.right_frame, text='Nov listek', command=self.ui_new_note)
         self.button_new_note.pack(fill=tk.X)
@@ -138,7 +131,8 @@ class App:
         self.middle_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_rename_box(self):
-        pass
+        self.ui_select_box()
+        rbw.RenameBoxWindow(self.root, self.main.rename_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
 
     # Note commands
 
@@ -152,7 +146,7 @@ class App:
     def ui_delete_notes(self):
         self.ui_select_notes()
         cw.ConfirmationWindow(self.root, 'Želite izbrisati izbrane listke?', self.main.selected_box.delete_selected, lambda x=self.main.selected_box: self.ui_open_box(x))
-    
+
     def ui_edit_note(self):
         pass
 
@@ -161,7 +155,8 @@ class App:
         mnw.MoveNoteWindow(self.root, self.main.selected_box, self.main.boxes, self.ui_open_box)
 
     def what_does_this_do(self):
-        self.ui_select_notes()
+        pass
+
 
 
 App()

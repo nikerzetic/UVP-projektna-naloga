@@ -4,12 +4,10 @@ import model
 
 class MoveNoteWindow:
     def __init__(self, master, box, content, command):
-        self.master = master
         self.box = box
-        self.content = content
         self.command = command
 
-        self.window = tk.Toplevel(self.master)
+        self.window = tk.Toplevel(master)
         self.window.title('Premakni listke')
 
         self.move_from_label = tk.LabelFrame(self.window, text='Premakni iz:')
@@ -22,8 +20,8 @@ class MoveNoteWindow:
         self.move_to_label.pack(fill=tk.BOTH, expand=tk.YES)
 
         self.tk_variable = tk.StringVar(self.move_to_label)
-        self.tk_variable.set(self.content[0])
-        self.option_menu = tk.OptionMenu(self.move_to_label, self.tk_variable, *self.content)
+        self.tk_variable.set(content[0])
+        self.option_menu = tk.OptionMenu(self.move_to_label, self.tk_variable, *content)
         self.option_menu.pack(fill=tk.X)
 
         self.button_frame = tk.Frame(self.move_to_label)
