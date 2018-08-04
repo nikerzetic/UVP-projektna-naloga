@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32613285-ca88-4d36-938b-e99e564f7400" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Praškatla.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Praškatla.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/confirm_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Poskus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Poskus.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boxes_main_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/boxes_main_file.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/move_note_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/move_note_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/user interface.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,6 +17,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="move_note_window.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/move_note_window.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="confirm_window.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/confirm_window.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="new_box_window.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/new_box_window.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,18 +68,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="move_note_window.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/move_note_window.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -75,15 +87,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user interface.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user interface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="153" column="48" lean-forward="true" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
+            <state relative-caret-position="391">
+              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#4793#4894#0" />
-                <element signature="e#5048#5172#0" />
                 <element signature="e#5537#5541#0" />
                 <element signature="e#6013#6017#0" />
               </folding>
@@ -122,8 +133,9 @@
         <option value="$PROJECT_DIR$/new_note_window.py" />
         <option value="$PROJECT_DIR$/listbox_and_scrollbar.py" />
         <option value="$PROJECT_DIR$/model.py" />
-        <option value="$PROJECT_DIR$/user interface.py" />
         <option value="$PROJECT_DIR$/move_note_window.py" />
+        <option value="$PROJECT_DIR$/confirm_window.py" />
+        <option value="$PROJECT_DIR$/user interface.py" />
       </list>
     </option>
   </component>
@@ -353,7 +365,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user interface.py</url>
-          <line>159</line>
+          <line>158</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -366,13 +378,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/listbox_and_scrollbar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -401,7 +406,6 @@
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#4793#4894#0" />
-            <element signature="e#5048#5172#0" />
             <element signature="e#5537#5541#0" />
             <element signature="e#6013#6017#0" />
           </folding>
@@ -436,7 +440,6 @@
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#4793#4894#0" />
-            <element signature="e#5048#5172#0" />
             <element signature="e#5537#5541#0" />
             <element signature="e#6013#6017#0" />
           </folding>
@@ -457,7 +460,6 @@
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#4793#4894#0" />
-            <element signature="e#5048#5172#0" />
             <element signature="e#5537#5541#0" />
             <element signature="e#6013#6017#0" />
           </folding>
@@ -691,26 +693,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user interface.py">
+    <entry file="file://$PROJECT_DIR$/move_note_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="153" column="48" lean-forward="true" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
+        <state relative-caret-position="459">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#4793#4894#0" />
-            <element signature="e#5048#5172#0" />
-            <element signature="e#5537#5541#0" />
-            <element signature="e#6013#6017#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/move_note_window.py">
+    <entry file="file://$PROJECT_DIR$/confirm_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+        <state relative-caret-position="442">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#4793#4894#0" />
+            <element signature="e#5537#5541#0" />
+            <element signature="e#6013#6017#0" />
           </folding>
         </state>
       </provider>

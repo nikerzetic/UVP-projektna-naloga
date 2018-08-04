@@ -29,11 +29,11 @@ class MoveNoteWindow:
         self.button_frame = tk.Frame(self.move_to_label)
         self.button_frame.pack(fill=tk.X)
 
-        self.cancel_button = tk.Button(self.button_frame, text='Prekliči', command=self.cancel)
-        self.cancel_button.grid(row=0, column=0)
-
         self.move_button = tk.Button(self.button_frame, text='Premakni', command=self.move)
-        self.move_button.grid(row=0, column=1)
+        self.move_button.grid(row=0, column=0)
+
+        self.cancel_button = tk.Button(self.button_frame, text='Prekliči', command=self.cancel)
+        self.cancel_button.grid(row=0, column=1)
 
     def cancel(self):
         self.window.destroy()
