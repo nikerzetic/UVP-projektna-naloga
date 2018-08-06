@@ -4,8 +4,9 @@ import listbox_and_scrollbar as las
 import new_box_window as nbw
 import new_note_window as nnw
 import move_note_window as mnw
-import confirm_window as cw
 import rename_box_window as rbw
+import edit_note_window as enw
+import tkinter.messagebox
 import ctypes
 
 # Window constants
@@ -119,7 +120,10 @@ class App:
 
     def ui_delete_box(self):
         self.ui_select_box()
-        cw.ConfirmationWindow(self.root, 'Želite izbrisati izbrano škatlo?', self.main.delete_selected_box, self.left_frame_listbox_and_scrollbar.refresh_listbox)
+        result = tk.messagebox.askokcancel('Potrdi izbiro', 'Želite izbrisati izbrano škatlo?')
+        if result:
+            self.main.delete_selected_box()
+            self.left_frame_listbox_and_scrollbar.refresh_listbox()
 
     def ui_open_box(self, selected_box=None):
         if selected_box:
@@ -145,10 +149,17 @@ class App:
 
     def ui_delete_notes(self):
         self.ui_select_notes()
-        cw.ConfirmationWindow(self.root, 'Želite izbrisati izbrane listke?', self.main.selected_box.delete_selected, lambda x=self.main.selected_box: self.ui_open_box(x))
+        result = tk.messagebox.askokcancel('Potrdi izbiro', 'Želite izbrisati izbrane listke?')
+        if result:
+            self.main.selected_box.delete_selected()
+            self.ui_open_box(self.main.selected_box)
 
     def ui_edit_note(self):
-        pass
+        self.ui_select_notes()
+        if len(self.main.selected_box.selected) == 1:
+            enw.EditNoteWindow(self.root, self.main.selected_box, min(self.main.selected_box.selected), self.ui_open_box)
+        else:
+            tk.messagebox.showerror('Opozorilo', 'Izbrano neveljavno število listkov')
 
     def ui_move_notes(self):
         self.ui_select_notes()
@@ -156,7 +167,6 @@ class App:
 
     def what_does_this_do(self):
         pass
-
 
 
 App()

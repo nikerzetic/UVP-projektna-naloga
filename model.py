@@ -1,4 +1,4 @@
-from os import remove
+import os
 
 
 class Main:
@@ -7,7 +7,6 @@ class Main:
         self.boxes = []
         self.notes = []
         self.selected_box = None
-        self.selected_notes = set()
         self.main_file = 'boxes_main_file.txt'
         self.refresh_boxes()
         self.position = 0
@@ -31,7 +30,7 @@ class Main:
 
     def delete_selected_box(self):
         try:
-            remove(self.selected_box.address)
+            os.remove(self.selected_box.address)
         except FileNotFoundError:
             pass
         self.boxes.remove(self.selected_box)
