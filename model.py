@@ -1,4 +1,4 @@
-import os
+from os import remove, listdir, getcwd
 
 
 class Main:
@@ -30,8 +30,13 @@ class Main:
 
     def delete_selected_box(self):
         try:
-            os.remove(self.selected_box.address)
+            print('SelectedBox:', self.selected_box)
+            print('SelectedBoxAddress:', self.selected_box.address)
+            print('Dir1:', listdir(getcwd()))
+            remove(self.selected_box.address)
+            print('Dir2:', listdir(getcwd()))
         except FileNotFoundError:
+            print('NotFound')
             pass
         self.boxes.remove(self.selected_box)
         self.selected_box = None
@@ -56,7 +61,7 @@ class Main:
             box = Box(name)
             self.selected_box.refresh_notes()
             box.refresh_notes()
-            box.content.append(self.selected_box.content)
+            box.content.extend(self.selected_box.content)
             box.save_changes()
             self.delete_selected_box()
 

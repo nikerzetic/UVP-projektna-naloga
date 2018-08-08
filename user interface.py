@@ -100,11 +100,11 @@ class App:
         self.button_new_note = tk.Button(self.right_frame, text='Nov listek', command=self.ui_new_note)
         self.button_new_note.pack(fill=tk.X)
 
-        self.button_edit_note = tk.Button(self.right_frame, text='Uredi listek', command=self.ui_edit_note)
-        self.button_edit_note.pack(fill=tk.X)
-
         self.button_delete_note = tk.Button(self.right_frame, text='Izbriši listke', command=self.ui_delete_notes)
         self.button_delete_note.pack(fill=tk.X)
+
+        self.button_edit_note = tk.Button(self.right_frame, text='Uredi listek', command=self.ui_edit_note)
+        self.button_edit_note.pack(fill=tk.X)
 
         self.button_move_note = tk.Button(self.right_frame, text='Premakni listke', command=self.ui_move_notes)
         self.button_move_note.pack(fill=tk.X)
@@ -141,7 +141,7 @@ class App:
     # Note commands
 
     def ui_new_note(self):
-        nnw.NewNoteWindow(self.root, self.main.boxes)
+        nnw.NewNoteWindow(self.root, self.main.boxes, self.ui_open_box)
 
     def ui_select_notes(self):
         self.main.selected_box.refresh_notes()

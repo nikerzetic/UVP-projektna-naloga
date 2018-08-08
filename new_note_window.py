@@ -3,9 +3,10 @@ import model
 
 
 class NewNoteWindow:
-    def __init__(self, master, content):
+    def __init__(self, master, content, command):
         self.master = master
         self.content = content
+        self.command = command
 
         self.window = tk.Toplevel(self.master)
         self.window.title('Nov listek')
