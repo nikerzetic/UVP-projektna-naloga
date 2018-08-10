@@ -30,13 +30,8 @@ class Main:
 
     def delete_selected_box(self):
         try:
-            print('SelectedBox:', self.selected_box)
-            print('SelectedBoxAddress:', self.selected_box.address)
-            print('Dir1:', listdir(getcwd()))
             remove(self.selected_box.address)
-            print('Dir2:', listdir(getcwd()))
         except FileNotFoundError:
-            print('NotFound')
             pass
         self.boxes.remove(self.selected_box)
         self.selected_box = None
