@@ -1,9 +1,7 @@
-# UVP-projektna-naloga
-
-## Spominske škatle
+# Spominske škatle
 
 
-### Uporaba programa
+## Uporaba programa
 
 Program poženete preko datoteke spominske \skatle.py. Avomatsko bo ustvarjena datoteka boxes_main_file.txt, v kateri bodo shranjena imena "škatel", in Praskatla.txt, ki služi za zgled. 
 
@@ -22,11 +20,11 @@ Ukazi iz drugega razdelka se nanašajo na "listke". Ti so:
 - Premakni listke: na zaslonu se prikaže novo okno, v katerem uporabnik izbere želeno destinacijo premika izbranih listkov. Po potrditvi, program listke premakne v novo škatlo.
 
 
-### Delovanje programa
+## Delovanje programa
 
 Po zagonu datoteke spominske \skatle.py, ta zažene razred App iz user_interface.py. Slednja se po potrebi sklicuje na preostale datoteke, predvsem na model.py, ki se ukvarja z odpiranjem in zapiranje datotek, ter hranjenjem podatkov. Je ogrodje programa, ki vsebuje funkcije, s katerimi je mogoče program upravljati tudi skozi konzolo. Preostale datotek so namenjene predvsem grafičnemu umesniku.
 
 
-### Znane težave
+## Znane težave
 
 Ko uporabnik izbriše "škatlo", je njeno ime odstranjeno s seznama boxes_main_file.py. Funkcija remmove iz zbirke os naj bi odstranila tudi .txt datoteko, v katerim je bila shranjena vsebina "škatle" z istim imenom. To je sprva delovalo, v poznejših verzijah programa, pa ta izbriše pot do datoteke in njeno vsebino, prazna datoteka .txt z istim imenom pa je še vedno vidna v mapi.
